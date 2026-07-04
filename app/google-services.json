@@ -7,20 +7,30 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:706339694572:android:a7fe3efb4a008b6ea942c9",
+        "mobilesdk_app_id": "1:706339694572:android:9a0627093b3a5e49a942c9",
         "android_client_info": {
           "package_name": "com.aistudio.studycontroller.pvkqrx"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "706339694572-9qga8r9734icftao4kocdavbjlt4b1ee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyBxSK0oNoUP1L1OrfxUGTpLNrJxluqiLaA"
+          "current_key": "AIzaSyBrZZnE3yAoavkxntHGGp2rXPWsljBBdoE"
         }
       ],
       "services": {
-        "appmeasure_service": {
-          "status": 2
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706339694572-9qga8r9734icftao4kocdavbjlt4b1ee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

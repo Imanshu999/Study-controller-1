@@ -1,4 +1,4 @@
-name: Build Android APK
+name: Build Signed Android Release APK
 
 on:
   push:
@@ -34,7 +34,6 @@ jobs:
       with:
         cache-disabled: true
 
-    # अगर गिटहब सीक्रेट्स खाली है, तो यह एरर से बचाने के लिए एक टेम्परेरी स्ट्रिंग डाल देगा
     - name: Create .env file
       run: |
         if [ -z "${{ secrets.GEMINI_API_KEY }}" ]; then
@@ -43,16 +42,25 @@ jobs:
           echo "GEMINI_API_KEY=\"${{ secrets.GEMINI_API_KEY }}\"" > .env
         fi
 
-    - name: Generate Dummy Debug Keystore
+    # 🔑 गिटहब सीक्रेट्स का इस्तेमाल करके ऑटोमैटिक डिजिटल चाबी (Keystore) बनाना
+    - name: Generate Release Keystore File
       run: |
-        keytool -genkey -v -keystore debug.keystore \
-          -storepass android -alias androiddebugkey -keypass android \
+        keytool -genkey -v -keystore keystore.jks \
+          -storepass "${{ secrets.KEYSTORE_PASSWORD }}" \
+          -alias "${{ secrets.KEY_ALIAS }}" \
+          -keypass "${{ secrets.KEY_PASSWORD }}" \
           -keyalg RSA -keysize 2048 -validity 10000 \
-          -dname "CN=Android Debug,O=Android,C=US"
+          -dname "CN=Takano3D,O=Takano3D,C=IN"
 
-    - name: Build Debug APK
+    # 🚀 असली Release APK बिल्ड करना (ग्रैडल वेरिएबल्स के साथ)
+    - name: Build Signed Release APK
+      env:
+        KEYSTORE_PATH: "keystore.jks"
+        KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
       run: |
-        ./gradlew clean assembleDebug \
+        ./gradlew clean assembleRelease \
           --no-build-cache \
           --no-configuration-cache \
           --no-daemon \
@@ -61,8 +69,9 @@ jobs:
           -Pandroid.disableResourceValidation=true \
           -x lint
           
-    - name: Upload APK Artifact
+    # 📦 बने हुए साइन्ड APK को गिटहब पर डाउनलोड के लिए अपलोड करना
+    - name: Upload Signed Release APK Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: Study-Controller-Debug-APK
-        path: app/build/outputs/apk/debug/app-debug.apk
+        name: Study-Controller-Signed-Release-APK
+        path: app/build/outputs/apk/release/app-release.apk

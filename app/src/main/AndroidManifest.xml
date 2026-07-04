@@ -2,7 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- 🌐 इंटरनेट और नेटवर्क की स्थिति जांचने के लिए (फायरबेस और वीडियो प्लेयर के लिए ज़रूरी) -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <!-- 🔊 वॉल्यूम और ऑडियो सेटिंग्स को कंट्रोल करने के लिए -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <!-- 📍 लोकेशन (स्थान) की अनुमति (अगर आप भविष्य में इस्तेमाल करना चाहें) -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- 📺 वीडियो प्लेयर के लिए: वीडियो चलते समय स्क्रीन को चालू रखने के लिए -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +28,7 @@
         android:theme="@style/Theme.MyApplication"
         android:hardwareAccelerated="true"
         android:usesCleartextTraffic="true">
+        
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -23,7 +37,6 @@
             android:hardwareAccelerated="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

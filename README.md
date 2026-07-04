@@ -3,8 +3,6 @@
 
 This contains everything you need to run your app locally.
 
-View your app in AI Studio: https://ai.studio/apps/4ca21d5c-004d-4b7e-864c-0554064d5ebf
-
 ## Run Locally
 
 1. Open Android Studio

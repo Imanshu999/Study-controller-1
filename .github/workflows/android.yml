@@ -42,17 +42,17 @@ jobs:
           echo "GEMINI_API_KEY=\"${{ secrets.GEMINI_API_KEY }}\"" > .env
         fi
 
-    # 🔑 गिटहब सीक्रेट्स का इस्तेमाल करके ऑटोमैटिक डिजिटल चाबी (Keystore) बनाना
+    # 🔑 चाबी को सीधे app/keystore.jks फोल्डर के अंदर बनाना (ताकि ग्रैडल को मिल सके)
     - name: Generate Release Keystore File
       run: |
-        keytool -genkey -v -keystore keystore.jks \
+        keytool -genkey -v -keystore app/keystore.jks \
           -storepass "${{ secrets.KEYSTORE_PASSWORD }}" \
           -alias "${{ secrets.KEY_ALIAS }}" \
           -keypass "${{ secrets.KEY_PASSWORD }}" \
           -keyalg RSA -keysize 2048 -validity 10000 \
           -dname "CN=Takano3D,O=Takano3D,C=IN"
 
-    # 🚀 असली Release APK बिल्ड करना (ग्रैडल वेरिएबल्स के साथ)
+    # 🚀 असली Release APK बिल्ड करना
     - name: Build Signed Release APK
       env:
         KEYSTORE_PATH: "keystore.jks"
@@ -69,7 +69,7 @@ jobs:
           -Pandroid.disableResourceValidation=true \
           -x lint
           
-    # 📦 बने हुए साइन्ड APK को गिटहब पर डाउनलोड के लिए अपलोड करना
+    # 📦 बने हुए साइन्ड APK को गिटहब पर अपलोड करना
     - name: Upload Signed Release APK Artifact
       uses: actions/upload-artifact@v4
       with:

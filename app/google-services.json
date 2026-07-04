@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "706339694572",
+    "project_id": "bunnii-media-2",
+    "storage_bucket": "bunnii-media-2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706339694572:android:a7fe3efb4a008b6ea942c9",
+        "android_client_info": {
+          "package_name": "com.aistudio.studycontroller.pvkqrx"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxSK0oNoUP1L1OrfxUGTpLNrJxluqiLaA"
+        }
+      ],
+      "services": {
+        "appmeasure_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
